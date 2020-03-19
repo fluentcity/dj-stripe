@@ -179,6 +179,10 @@ class Account(StripeModel):
         This ensures that the foreign-key relations that may exist in stripe are
         fetched using the appropriate connected account ID.
         """
+
+        # BUGFIX: payouts_enabled cannot be nullable
+        data.setdefault('payouts_enabled', True)
+
         return super()._create_from_stripe_object(
             data=data,
             current_ids=current_ids,
