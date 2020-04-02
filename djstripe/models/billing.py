@@ -1660,6 +1660,13 @@ class Subscription(StripeModel):
             cls._stripe_object_to_default_tax_rates(target_cls=TaxRate, data=data)
         )
 
+    @classmethod
+    def _create_from_stripe_object(cls, data, *args, **kwargs):
+        # BUGFIX: "start" has been replaced by "start_date" in newer versions
+        # of the Stripe API so to fix the bug we just copy the value over.
+        data.setdefault('start', data['start_date'])
+        super()._create_from_stripe_object(data, *args, **kwargs)
+
 
 class SubscriptionItem(StripeModel):
     """
