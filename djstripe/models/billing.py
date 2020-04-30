@@ -1667,6 +1667,12 @@ class Subscription(StripeModel):
         data.setdefault('start', data['start_date'])
         super()._create_from_stripe_object(data, *args, **kwargs)
 
+    @classmethod
+    def sync_from_stripe_data(cls, data):
+        # BUGFIX: same as above.
+        data.setdefault('start', data['start_date'])
+        super().sync_from_stripe_data(data)
+
 
 class SubscriptionItem(StripeModel):
     """
