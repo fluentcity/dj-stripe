@@ -3,6 +3,7 @@ __pycache__
 .coverage
 .tox
 *.mo
+.DS_Store
 
 # Sphinx
 docs/_build

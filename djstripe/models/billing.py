@@ -1665,13 +1665,13 @@ class Subscription(StripeModel):
         # BUGFIX: "start" has been replaced by "start_date" in newer versions
         # of the Stripe API so to fix the bug we just copy the value over.
         data.setdefault('start', data['start_date'])
-        super()._create_from_stripe_object(data, *args, **kwargs)
+        return super()._create_from_stripe_object(data, *args, **kwargs)
 
     @classmethod
     def sync_from_stripe_data(cls, data):
         # BUGFIX: same as above.
         data.setdefault('start', data['start_date'])
-        super().sync_from_stripe_data(data)
+        return super().sync_from_stripe_data(data)
 
 
 class SubscriptionItem(StripeModel):
